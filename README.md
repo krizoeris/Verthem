@@ -1,2 +1,2 @@
-# page-builder
-Page Builder like Wix and Elementor
+# Verthem
+Verthem is a Page Builder like Wix and Elementor
