@@ -1,0 +1,2 @@
+// Remove this file
+// Add schema inside this 'models' folder
