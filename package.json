@@ -12,11 +12,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@radix-ui/react-avatar": "^1.0.4",
-=======
     "@next/env": "^14.2.3",
->>>>>>> 01d35cee0cd4f33d2139e44dbc42bf9b2db4884a
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
