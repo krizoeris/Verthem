@@ -12,7 +12,7 @@ const FormSchema = z.object({
   }),
   email: z
     .string({
-      invalid_type_error: "Please select a customer.",
+      invalid_type_error: "Please select a email address.",
     })
     .email("Invalid email address."),
   password: z
@@ -69,12 +69,13 @@ export async function createUser(
       created_at: date,
       updated_at: date,
     });
-    revalidatePath("/login");
-    redirect("/login");
   } catch (error) {
     return {
       errors: prevState.errors,
       message: "Database Error: Failed to create user",
     };
+  } finally {
+    revalidatePath("/login");
+    redirect("/login");
   }
 }

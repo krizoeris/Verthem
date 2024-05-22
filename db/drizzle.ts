@@ -1,6 +1,6 @@
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
-import "dotenv/config";
+import "@next/env";
 
 if (!process.env.POSTGRES_URL) {
   throw new Error("POSTGRES_URL environment variable is not defined");
