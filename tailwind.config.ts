@@ -17,7 +17,20 @@ const config = {
         "2xl": "1400px",
       },
     },
+    fontSize: {
+      sm: ['12px', '18px'],
+      base: ['14px', '20px'],
+      lg: ['20px', '28px'],
+      xl: ['24px', '32px'],
+    },
     extend: {
+      colors: {
+        accent: {
+          "100": "#52DFFF",
+          "75": "#41adca",
+          "50": "#317b95",
+        },
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

@@ -17,8 +17,9 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  /* color: var(--foreground); */
+  /* color: rgb(var(--foreground-rgb)); */
+  color: var(--foreground);
+  @apply text-base;
 }
 
 @layer utilities {
