@@ -3,11 +3,6 @@ import type { Config } from "tailwindcss"
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
@@ -22,13 +17,6 @@ const config = {
         "2xl": "1400px",
       },
     },
-    extend: {
-      fontSize: {
-        sm: ['12px', '18px'],
-        base: ['14px', '20px'],
-        lg: ['20px', '28px'],
-        xl: ['24px', '32px'],
-      },  
     extend: {
       fontSize: {
         sm: ["12px", "18px"],
@@ -66,7 +54,6 @@ const config = {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
-        "muted-foreground": "hsl(var(--muted-foreground))",
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
