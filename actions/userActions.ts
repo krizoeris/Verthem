@@ -1,14 +1,17 @@
 "use server";
 import { z } from "zod";
-import db from "@/db/drizzle";
-import { users } from "@/db/schema";
+import { db } from "@/db";
+import { Users } from "@/db/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const FormSchema = z.object({
   id: z.string(),
-  name: z.string({
-    invalid_type_error: "Please select a name.",
+  first_name: z.string({
+    invalid_type_error: "Please select a first name.",
+  }),
+  last_name: z.string({
+    invalid_type_error: "Please select a last name.",
   }),
   email: z
     .string({
@@ -31,8 +34,10 @@ const CreateUser = FormSchema.omit({
 });
 
 export type State = {
+  success?: {},
   errors?: {
-    name?: string[] | undefined;
+    first_name?: string[] | undefined;
+    last_name?: string[] | undefined;
     email?: string[] | undefined;
     password?: string[] | undefined;
   };
@@ -44,7 +49,8 @@ export async function createUser(
   formData: FormData
 ): Promise<State> {
   const validatedFields = CreateUser.safeParse({
-    name: formData.get("name"),
+    first_name: formData.get("first_name"),
+    last_name: formData.get("last_name"),
     email: formData.get("email"),
     password: formData.get("password"),
   });
@@ -58,24 +64,30 @@ export async function createUser(
 
   const id = crypto.randomUUID();
   const date = new Date();
-  const { name, email, password } = validatedFields.data;
+  const { first_name, last_name, email, password } = validatedFields.data;
+  console.log('out');
   try {
-    await db.insert(users).values({
+    console.log('in');
+    const data = await db.insert(Users).values({
       id: id,
-      name: name,
+      first_name: first_name,
+      last_name: last_name,
       email: email,
       password: password,
       image: "image.png",
       created_at: date,
       updated_at: date,
-    });
+    }).returning();
+
+    return {
+      success: data,
+      message: "User successfully created",
+    };
   } catch (error) {
+    console.log(error)
     return {
       errors: prevState.errors,
       message: "Database Error: Failed to create user",
     };
-  } finally {
-    revalidatePath("/login");
-    redirect("/login");
   }
 }

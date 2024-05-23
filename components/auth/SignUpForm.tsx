@@ -9,6 +9,7 @@ import { useFormState } from "react-dom";
 export default function SignupForm() {
   const initialState: State = { message: null, errors: {} }; // Ensure initialState matches State type
   const [state, dispatch] = useFormState(createUser, initialState);
+  console.log(state)
   return (
     <form action={dispatch}>
       <div className="grid gap-4">
@@ -16,8 +17,8 @@ export default function SignupForm() {
           <div className="grid gap-2">
             <Label htmlFor="name">First Name</Label>
             <Input
-              id="fname"
-              name="fname"
+              id="first_name"
+              name="first_name"
               placeholder="Max"
               aria-describedby="fname-error"
             />
@@ -31,10 +32,10 @@ export default function SignupForm() {
           </div> */}
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="lname">Last Name</Label>
+            <Label htmlFor="last_name">Last Name</Label>
             <Input
               id="name"
-              name="lname"
+              name="last_name"
               placeholder="Robinson"
               aria-describedby="name-error"
             />
