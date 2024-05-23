@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Authentication",
+    title: "Integrations",
   };
 
-export default function AuthPageLayout({
+export default function IntegrationsPageLayout({
     children,
     }: Readonly<{
         children: React.ReactNode;
