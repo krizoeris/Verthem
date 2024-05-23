@@ -58,7 +58,7 @@ export default function Aside() {
   ];
 
   return (
-    <div className="flex flex-col justify-between pt-8 pb-8 pl-4 pr-4 max-w-[100px] w-[100px] bg-slate-900 text-white">
+    <div className="flex flex-col justify-between pt-8 pb-8 pl-4 pr-4 max-w-[100px] w-[100px] bg-slate-900 text-neutral-50">
       <div className="flex justify-center items-center">
         <Link href="/dashboard">
           <Image 
@@ -73,7 +73,7 @@ export default function Aside() {
       </div>
 
       <div>
-        <Link href="/logout" className="flex items-center justify-center text-accent-100 hover:text-accent-75 hover:transition-all">
+        <Link href="/logout" className="flex items-center justify-center text-verthem-900 hover:text-verthem-700 hover:transition-all">
           <div className="w-[24px] h-[24px]">
             <LogOut className="w-6 h-6" />
           </div>

@@ -7,7 +7,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-  ],
+	],
   prefix: "",
   theme: {
     container: {
@@ -17,19 +17,60 @@ const config = {
         "2xl": "1400px",
       },
     },
-    fontSize: {
-      sm: ['12px', '18px'],
-      base: ['14px', '20px'],
-      lg: ['20px', '28px'],
-      xl: ['24px', '32px'],
-    },
     extend: {
+      fontSize: {
+        sm: ['12px', '18px'],
+        base: ['14px', '20px'],
+        lg: ['20px', '28px'],
+        xl: ['24px', '32px'],
+      },  
       colors: {
-        accent: {
-          "100": "#52DFFF",
-          "75": "#41adca",
-          "50": "#317b95",
+        verthem: {
+          "900": "#52dfff",
+          "800": "#63e2ff",
+          "700": "#75e5ff",
+          "600": "#86e9ff",
+          "500": "#97ecff",
+          "400": "#a9efff",
         },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {
