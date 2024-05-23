@@ -3,10 +3,10 @@ import type { Config } from "tailwindcss"
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -17,14 +17,15 @@ const config = {
         "2xl": "1400px",
       },
     },
-    fontSize: {
-      sm: ['12px', '18px'],
-      base: ['14px', '20px'],
-      lg: ['20px', '28px'],
-      xl: ['24px', '32px'],
-    },
     extend: {
+      fontSize: {
+        sm: ["12px", "18px"],
+        base: ["14px", "20px"],
+        lg: ["20px", "28px"],
+        xl: ["24px", "32px"],
+      },
       colors: {
+        "muted-foreground": "hsl(var(--muted-foreground))",
         accent: {
           "100": "#52DFFF",
           "75": "#41adca",
@@ -48,6 +49,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
 export default config
