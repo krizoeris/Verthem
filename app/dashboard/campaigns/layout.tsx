@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Templates",
+    title: "Pages",
   };
 
-export default function TemplatesPageLayout({
+export default function CampaignsPageLayout({
     children,
     }: Readonly<{
         children: React.ReactNode;

@@ -1,6 +1,7 @@
-import React from 'react'
+import React from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Input } from '../ui/input'
+import { Input } from "../ui/input"
+import Link from "next/link"
 
 export default function Header() {
   return (
@@ -10,10 +11,12 @@ export default function Header() {
       </div>
       <div className="flex items-center gap-3">
         <p>John Doe</p>
-        <Avatar className="w-10 h-10">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <Link href="/dashboard/profile">
+          <Avatar className="w-10 h-10">
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </Link>
       </div>
     </div>
   )

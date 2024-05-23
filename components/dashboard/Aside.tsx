@@ -2,6 +2,13 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 
+// Import Types
+import { MenuItem } from "@/app/types/definitions";
+
+// Import Components
+import MenuList from "@/components/dashboard/menu/MenuList";
+
+// Import Lucide Icons
 import { 
   Home, 
   LayoutTemplate, 
@@ -20,16 +27,8 @@ const iconMapping = {
   Settings
 };
 
-// Declare Type for menu list
-type MenuItem = {
-  title: string;
-  icon: keyof typeof iconMapping;
-  link: string;
-};
-
 export default function Aside() {
-
-  // Object for menu
+  // Menu List
   const menuList: MenuItem[] = [
     {
       title: "Dashboard",
@@ -39,22 +38,22 @@ export default function Aside() {
     {
       title: "Pages",
       icon: "LayoutTemplate",
-      link: "/pages"
+      link: "/dashboard/campaigns"
     },
     {
       title: "Integration",
       icon: "MousePointerClick",
-      link: "/integration"
+      link: "/dashboard/integration"
     },
     {
       title: "Domains",
       icon: "Anchor",
-      link: "/domains"
+      link: "/dashboard/domains"
     },
     {
       title: "Settings",
       icon: "Settings",
-      link: "/settings"
+      link: "/dashboard/settings"
     },
   ];
 
@@ -70,21 +69,7 @@ export default function Aside() {
       </div>
 
       <div className="flex flex-col items-center">
-        <ul className="flex flex-col gap-4">
-          {menuList.map((menu, index) => {
-            const Icon = iconMapping[menu.icon];
-            return (
-              <li key={index} className="w-[64px] group pt-1 pb-1 hover:bg-slate-100 hover:transition-all hover:ease-in rounded-md">
-                <Link href={menu.link}>
-                  <div className="flex flex-col items-center justify-center gap-2 group-hover:text-slate-900 group-hover:transition-all group-hover:ease-in">
-                    <Icon className="w-6 h-6" />
-                    <p className="text-sm">{menu.title}</p>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <MenuList menuList={menuList} iconMapping={iconMapping} />
       </div>
 
       <div>
