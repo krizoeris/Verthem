@@ -1,6 +1,7 @@
 export type User = {
   id: string;
-  name: string;
+  fname: string;
+  lname: string;
   email: string;
   password: string;
   image: string;

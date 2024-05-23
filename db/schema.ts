@@ -1,15 +1,9 @@
-import {
-  integer,
-  text,
-  timestamp,
-  pgTable,
-  uuid,
-  varchar,
-} from "drizzle-orm/pg-core";
+import { text, timestamp, pgTable, uuid } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
-  name: text("name").notNull(),
+  fname: text("fname").notNull(),
+  lname: text("lname").notNull(),
   email: text("email").notNull(),
   password: text("password").notNull(),
   image: text("image"),

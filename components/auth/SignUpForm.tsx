@@ -5,6 +5,9 @@ import { Label } from "@/components/ui/label";
 
 import { createUser, State } from "@/actions/userActions";
 import { useFormState } from "react-dom";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function SignupForm() {
   const initialState: State = { message: null, errors: {} }; // Ensure initialState matches State type
@@ -12,40 +15,47 @@ export default function SignupForm() {
   return (
     <form action={dispatch}>
       <div className="grid gap-4">
+        {state.message && (
+          <Alert variant="destructive">
+            <ExclamationTriangleIcon className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{state.message}</AlertDescription>
+          </Alert>
+        )}
         <div className="grid grid-cols-2 gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="name">First Name</Label>
+            <Label htmlFor="fname">First Name</Label>
             <Input
               id="fname"
               name="fname"
               placeholder="Max"
               aria-describedby="fname-error"
             />
-            {/* <div id="name-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.name &&
-              state.errors.name.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
-          </div> */}
+            <div id="fname-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.fname &&
+                state.errors.fname.map((error: string) => (
+                  <p className="mt-2 text-sm text-destructive" key={error}>
+                    {error}
+                  </p>
+                ))}
+            </div>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="lname">Last Name</Label>
             <Input
-              id="name"
+              id="lname"
               name="lname"
               placeholder="Robinson"
-              aria-describedby="name-error"
+              aria-describedby="lname-error"
             />
-            {/* <div id="name-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.name &&
-              state.errors.name.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
-          </div> */}
+            <div id="lname-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.lname &&
+                state.errors.lname.map((error: string) => (
+                  <p className="mt-2 text-sm text-destructive" key={error}>
+                    {error}
+                  </p>
+                ))}
+            </div>
           </div>
         </div>
 
@@ -61,7 +71,7 @@ export default function SignupForm() {
           <div aria-live="polite" aria-atomic="true" id="email-error">
             {state.errors?.email &&
               state.errors.email.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
+                <p className="mt-2 text-sm text-destructive" key={error}>
                   {error}
                 </p>
               ))}
@@ -78,11 +88,10 @@ export default function SignupForm() {
           <div id="password-error" aria-live="polite" aria-atomic="true">
             {state.errors?.password &&
               state.errors.password.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
+                <p className="mt-2 text-sm text-destructive" key={error}>
                   {error}
                 </p>
               ))}
-            <p className="mt-2 text-sm text-red-500">{state.message}</p>
           </div>
         </div>
         <Button type="submit" className="w-full">
