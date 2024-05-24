@@ -6,6 +6,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -68,7 +70,6 @@ export async function createUser(
   }
 
   try {
-    console.log("in");
     const data = await db
       .insert(Users)
       .values({
@@ -83,18 +84,38 @@ export async function createUser(
       })
       .returning();
 
-    return {
-      success: data,
-      message: "User successfully created",
-    };
+    return signIn("credentials", formData);
+    // return {
+    //   success: data,
+    //   message: "User successfully created",
+    // };
   } catch (error) {
-    console.log(error);
     return {
       errors: prevState.errors,
       message: "Database Error: Failed to create user",
     };
-  } finally {
-    revalidatePath("/dashboard");
-    redirect("/dashboard");
+  }
+  //  finally {
+  //   revalidatePath("/dashboard");
+  //   redirect("/dashboard");
+  // }
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid Credentials";
+        default:
+          return "Something went wrong";
+      }
+    }
+    throw error;
   }
 }
