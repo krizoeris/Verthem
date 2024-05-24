@@ -12,6 +12,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 export default function SignupForm() {
   const initialState: State = { message: null, errors: {} }; // Ensure initialState matches State type
   const [state, dispatch] = useFormState(createUser, initialState);
+  console.log(state);
   return (
     <form action={dispatch}>
       <div className="grid gap-4">
@@ -26,14 +27,14 @@ export default function SignupForm() {
           <div className="grid gap-2">
             <Label htmlFor="fname">First Name</Label>
             <Input
-              id="fname"
-              name="fname"
+              id="first_name"
+              name="first_name"
               placeholder="Max"
               aria-describedby="fname-error"
             />
             <div id="fname-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.fname &&
-                state.errors.fname.map((error: string) => (
+              {state.errors?.first_name &&
+                state.errors.first_name.map((error: string) => (
                   <p className="mt-2 text-sm text-destructive" key={error}>
                     {error}
                   </p>
@@ -41,16 +42,16 @@ export default function SignupForm() {
             </div>
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="lname">Last Name</Label>
+            <Label htmlFor="last_name">Last Name</Label>
             <Input
-              id="lname"
-              name="lname"
+              id="name"
+              name="last_name"
               placeholder="Robinson"
               aria-describedby="lname-error"
             />
             <div id="lname-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.lname &&
-                state.errors.lname.map((error: string) => (
+              {state.errors?.last_name &&
+                state.errors.last_name.map((error: string) => (
                   <p className="mt-2 text-sm text-destructive" key={error}>
                     {error}
                   </p>

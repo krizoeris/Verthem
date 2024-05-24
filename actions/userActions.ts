@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
-import db from "@/db/drizzle";
-import { users } from "@/db/schema";
+import { db } from "@/db";
+import { Users } from "@/db/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
@@ -9,8 +9,8 @@ import { eq } from "drizzle-orm";
 
 const FormSchema = z.object({
   id: z.string(),
-  fname: z.string().min(1, "Please enter your first name"),
-  lname: z.string().min(1, "Please enter your last name"),
+  first_name: z.string().min(1, "Please enter your first name"),
+  last_name: z.string().min(1, "Please enter your last name"),
   email: z.string().email("Invalid email address."),
   password: z.string().min(6, "Password must be at least 6 characters long."),
   created_at: z.string(),
@@ -23,9 +23,10 @@ const CreateUser = FormSchema.omit({
 });
 
 export type State = {
+  success?: {};
   errors?: {
-    fname?: string[] | undefined;
-    lname?: string[] | undefined;
+    first_name?: string[] | undefined;
+    last_name?: string[] | undefined;
     email?: string[] | undefined;
     password?: string[] | undefined;
   };
@@ -37,8 +38,8 @@ export async function createUser(
   formData: FormData
 ): Promise<State> {
   const validatedFields = CreateUser.safeParse({
-    fname: formData.get("fname"),
-    lname: formData.get("lname"),
+    first_name: formData.get("first_name"),
+    last_name: formData.get("last_name"),
     email: formData.get("email"),
     password: formData.get("password"),
   });
@@ -52,15 +53,14 @@ export async function createUser(
 
   const id = crypto.randomUUID();
   const date = new Date();
-  const { fname, lname, email, password } = validatedFields.data;
+  const { first_name, last_name, email, password } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10);
 
   // Check if email already exists
   const existingUser = await db
     .select()
-    .from(users)
-    .where(eq(users.email, email));
-  console.log(existingUser);
+    .from(Users)
+    .where(eq(Users.email, email));
   if (existingUser.length > 0) {
     return {
       message: "Email already exists.",
@@ -68,17 +68,27 @@ export async function createUser(
   }
 
   try {
-    await db.insert(users).values({
-      id: id,
-      fname: fname,
-      lname: lname,
-      email: email,
-      password: hashedPassword,
-      image: "image.png",
-      created_at: date,
-      updated_at: date,
-    });
+    console.log("in");
+    const data = await db
+      .insert(Users)
+      .values({
+        id: id,
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        password: hashedPassword,
+        image: "image.png",
+        created_at: date,
+        updated_at: date,
+      })
+      .returning();
+
+    return {
+      success: data,
+      message: "User successfully created",
+    };
   } catch (error) {
+    console.log(error);
     return {
       errors: prevState.errors,
       message: "Database Error: Failed to create user",
