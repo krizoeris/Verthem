@@ -86,7 +86,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground text-base;
+    @apply bg-slate-50 text-foreground text-base;
   }
   p {
     @apply text-base

@@ -41,7 +41,7 @@ export default function Aside() {
       link: "/dashboard"
     },
     {
-      title: "Pages",
+      title: "Campaigns",
       icon: "LayoutTemplate",
       link: "/dashboard/campaigns"
     },
@@ -63,7 +63,7 @@ export default function Aside() {
   ];
 
   return (
-    <div className="flex flex-col justify-between pt-8 pb-8 pl-4 pr-4 max-w-[100px] w-[100px] bg-slate-900 text-neutral-50">
+    <div className="flex flex-col justify-between pt-8 pb-8 pl-3 pr-3 max-w-[100px] w-[100px] bg-slate-900 text-neutral-50">
       <div className="flex justify-center items-center">
         <Link href="/dashboard">
           <Image 

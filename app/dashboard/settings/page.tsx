@@ -1,10 +1,12 @@
 import React from 'react';
+import PageTitle from '@/components/dashboard/PageTitle';
 
 export default function SettingsPage() {
+  const subText: string = "Display all related content here.";
+
   return (
-    <div>
-      <h1 className="mb-2 text-lg text-neutral-700 font-bold">Settings</h1>
-      <p>Display all related Settings here</p>
-    </div>
+    <section className="h-full flex flex-col gap-4">
+      <PageTitle subText={subText} />
+    </section>
   );
 }

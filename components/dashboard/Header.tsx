@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function Header() {
   return (
-    <div className="flex justify-between items-center h-[60px] pl-3 pr-3 border-b border-border">
+    <div className="flex justify-between items-center h-[60px] pl-3 pr-3 border-b border-border bg-background">
       <div>
         <Input placeholder="Search..." className="w-[385px]"/>
       </div>

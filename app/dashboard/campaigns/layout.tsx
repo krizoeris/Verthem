@@ -3,8 +3,8 @@ import { Suspense } from 'react'
 import Loading from "./loading";
 
 export const metadata: Metadata = {
-    title: "Pages",
-  };
+    title: "Campaigns",
+};
 
 export default function CampaignsPageLayout({
     children,

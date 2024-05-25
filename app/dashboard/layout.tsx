@@ -16,7 +16,7 @@ export default function DashboardPageLayout({
             <Aside/>
             <div className="flex flex-col w-full">
                 <Header/>
-                <div className="p-8">{ children }</div>
+                <div className="h-screen p-8">{ children }</div>
             </div>
         </div>
     );
