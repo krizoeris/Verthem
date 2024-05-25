@@ -4,7 +4,7 @@ import Link from "next/link"
 import { signOut } from "@/auth";
 
 // Import Types
-import { MenuItem } from "@/app/types/definitions";
+import { MenuItem } from "@/types/definitions";
 
 // Import Components
 import MenuList from "@/components/dashboard/menu/MenuList";
