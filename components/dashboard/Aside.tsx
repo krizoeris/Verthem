@@ -1,6 +1,8 @@
+'use client'
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from 'next/navigation'
 
 // Import Types
 import { MenuItem } from "@/app/types/definitions";
@@ -28,6 +30,9 @@ const iconMapping = {
 };
 
 export default function Aside() {
+  // Pass pathname to MenuListProps
+  const pathName = usePathname();
+  
   // Menu List
   const menuList: MenuItem[] = [
     {
@@ -69,7 +74,7 @@ export default function Aside() {
       </div>
 
       <div className="flex flex-col items-center">
-        <MenuList menuList={menuList} iconMapping={iconMapping} />
+        <MenuList menuList={menuList} iconMapping={iconMapping} pathName={pathName} />
       </div>
 
       <div>
