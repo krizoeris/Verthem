@@ -1,5 +1,5 @@
 export interface Template {
-    _id: number;
+    id: number;
     name: string;
     template: string;
     status: 'active' | 'inactive';

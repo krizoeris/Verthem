@@ -3,7 +3,7 @@ import { CampaignDomain }  from '../Campaign/CampaignDomain';
 import { User }  from '../User/User';
 
 export interface Campaign {
-    _id: number;
+    id: number;
     name: string;
     user: User;
     domain: CampaignDomain;
