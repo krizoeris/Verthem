@@ -1,11 +1,12 @@
 export type User = {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   image: string;
-  created_at: string;
-  updated_at: string;
+  created_at: Date;
+  updated_at: Date;
 };
 
 export type MenuItem = {

@@ -4,29 +4,20 @@ import { db } from "@/db";
 import { Users } from "@/db/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import bcrypt from "bcrypt";
+import { eq } from "drizzle-orm";
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
 
 const FormSchema = z.object({
   id: z.string(),
-  first_name: z.string({
-    invalid_type_error: "Please select a first name.",
-  }),
-  last_name: z.string({
-    invalid_type_error: "Please select a last name.",
-  }),
-  email: z
-    .string({
-      invalid_type_error: "Please select a email address.",
-    })
-    .email("Invalid email address."),
-  password: z
-    .string({
-      invalid_type_error: "Please enter a valid password.",
-    })
-    .min(8, "Password must be at least 8 characters long."),
+  first_name: z.string().min(1, "Please enter your first name"),
+  last_name: z.string().min(1, "Please enter your last name"),
+  email: z.string().email("Invalid email address."),
+  password: z.string().min(6, "Password must be at least 6 characters long."),
   created_at: z.string(),
   updated_at: z.string(),
 });
-
 const CreateUser = FormSchema.omit({
   id: true,
   created_at: true,
@@ -34,7 +25,7 @@ const CreateUser = FormSchema.omit({
 });
 
 export type State = {
-  success?: {},
+  success?: {};
   errors?: {
     first_name?: string[] | undefined;
     last_name?: string[] | undefined;
@@ -65,29 +56,66 @@ export async function createUser(
   const id = crypto.randomUUID();
   const date = new Date();
   const { first_name, last_name, email, password } = validatedFields.data;
-  console.log('out');
-  try {
-    console.log('in');
-    const data = await db.insert(Users).values({
-      id: id,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      password: password,
-      image: "image.png",
-      created_at: date,
-      updated_at: date,
-    }).returning();
+  const hashedPassword = await bcrypt.hash(password, 10);
 
+  // Check if email already exists
+  const existingUser = await db
+    .select()
+    .from(Users)
+    .where(eq(Users.email, email));
+  if (existingUser.length > 0) {
     return {
-      success: data,
-      message: "User successfully created",
+      message: "Email already exists.",
     };
+  }
+
+  try {
+    const data = await db
+      .insert(Users)
+      .values({
+        id: id,
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        password: hashedPassword,
+        image: "image.png",
+        created_at: date,
+        updated_at: date,
+      })
+      .returning();
+
+    return signIn("credentials", formData);
+    // return {
+    //   success: data,
+    //   message: "User successfully created",
+    // };
   } catch (error) {
-    console.log(error)
     return {
       errors: prevState.errors,
       message: "Database Error: Failed to create user",
     };
+  }
+  //  finally {
+  //   revalidatePath("/dashboard");
+  //   redirect("/dashboard");
+  // }
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid Credentials";
+        default:
+          return "Something went wrong";
+      }
+    }
+    throw error;
   }
 }

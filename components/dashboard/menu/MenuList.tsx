@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
-import { MenuItem } from "@/app/types/definitions";
+import { MenuItem } from "@/types/definitions";
 
 type MenuListProps = {
     menuList: MenuItem[];
