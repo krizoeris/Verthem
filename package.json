@@ -9,7 +9,11 @@
     "lint": "next lint",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx ./db/migrate.ts",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@next/env": "^14.2.3",
@@ -32,6 +36,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",
@@ -39,7 +45,10 @@
     "drizzle-kit": "^0.21.2",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.3",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.5",
     "postcss": "^8.4.38",
+    "prettier": "3.2.5",
     "tailwindcss": "^3.4.3",
     "tsx": "^4.10.5",
     "typescript": "^5.4.5"
