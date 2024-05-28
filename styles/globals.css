@@ -91,6 +91,14 @@
   p {
     @apply text-base;
   }
+
+  .verthem-homepage p {
+    @apply text-[18px] font-light tracking-wide;
+  }
+
+  .verthem-homepage a {
+    @apply text-[16px] font-medium tracking-wide;
+  }
 }
 #verthem-logo,
 .plugin-stroke {
