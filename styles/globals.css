@@ -89,6 +89,15 @@
     @apply bg-background text-foreground text-base;
   }
   p {
-    @apply text-base
+    @apply text-base;
   }
+}
+#verthem-logo,
+.plugin-stroke {
+  visibility: hidden;
+}
+.plugin-stroke {
+  stroke: #fff;
+  stroke-width: 1px;
+  fill: none;
 }
