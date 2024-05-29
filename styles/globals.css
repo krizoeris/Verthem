@@ -107,6 +107,10 @@
     @apply text-base lg:text-[16px] tracking-wide;
   }
 
+  .verthem-homepage .middle-item {
+    @apply flex-col-reverse;
+  }
+
   .verthem-homepage .marquee-inner span {
     @apply text-[10vw] px-[2vw] uppercase leading-normal;
   }

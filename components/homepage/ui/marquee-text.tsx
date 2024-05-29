@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Krona_One } from "next/font/google";
 import Marquee from "react-fast-marquee";

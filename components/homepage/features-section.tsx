@@ -1,74 +1,164 @@
+"use client";
+
 import React from "react";
-import { Krona_One } from "next/font/google";
 import Image from "next/image";
+import { Krona_One } from "next/font/google";
+import { motion } from "framer-motion";
+import { scaleInView } from "@/utils/framer-variants";
+import { useInViewHook } from "@/hooks/homepage-hooks";
 
 const kronaOne = Krona_One({ weight: "400", subsets: ["latin"] });
+
+export interface FeatureItemProps {
+  item: {
+    subtitle: string;
+    title: string;
+    description: string;
+    header: React.ReactNode;
+  };
+}
 
 export default function FeaturesSection() {
   return (
     <section className="features-section">
       {items.map((item, i) => (
-        <div
-          key={i}
-          className="grid lg:grid-cols-2 gap-12 mb-24 even:grid-cols-reverse"
-        >
-          <div className=" flex flex-col justify-center">
-            <span
-              className={`${kronaOne.className} text-md uppercase text-[#00CAF8] mb-6`}
-            >
-              {item.subtitle}
-            </span>
-            <h2 className="text-3xl font-medium mb-2">{item.title}</h2>
-            <p className="mb-10">{item.description}</p>
-            <a
-              href="/signup"
-              className="verthem-btn w-fit rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white"
-            >
-              Start building for free
-            </a>
-          </div>
-          <div>{item.header}</div>
-        </div>
+        <FeatureItem key={i} item={item} />
       ))}
     </section>
   );
 }
 
-const FeatureImgOne = () => {
-  return (
-    <div className="flex flex-1 relative dark:bg-dot-white/[0.2] bg-dot-black/[0.2] justify-center w-full h-full min-h-[440px] rounded-xl overflow-hidden">
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-100 to-cyan-50 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+const FeatureItem = ({ item }: FeatureItemProps) => {
+  const { ref, inView } = useInViewHook();
 
-      <Image
-        src="/images/homepage/feat-1-alignment.svg"
-        alt="avatar"
-        height="534"
-        width="400"
-        className="mt-8 -mb-24 -mr-24 z-10"
-      />
-      <Image
-        src="/images/homepage/feat-1-color.svg"
-        alt="avatar"
-        height="330"
-        width="360"
-        className="mt-8 -mr-16 z-20"
-      />
+  return (
+    <div
+      ref={ref}
+      className="grid lg:grid-cols-2 gap-12 mb-16 even:grid-cols-reverse"
+    >
+      <motion.div
+        initial="initial"
+        animate={inView ? "animate" : "initial"}
+        className="flex flex-col justify-center"
+      >
+        <motion.span
+          variants={scaleInView}
+          className={`${kronaOne.className} text-md uppercase text-[#00CAF8] mb-6`}
+        >
+          {item.subtitle}
+        </motion.span>
+        <motion.h2
+          variants={scaleInView}
+          className="text-3xl font-semibold mb-2"
+        >
+          {item.title}
+        </motion.h2>
+        <motion.p variants={scaleInView} className="mb-10">
+          {item.description}
+        </motion.p>
+        <motion.a
+          variants={scaleInView}
+          href="/signup"
+          className="verthem-btn w-fit rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white"
+        >
+          Start building for free
+        </motion.a>
+      </motion.div>
+      <motion.div
+        initial="initial"
+        animate={inView ? "animate" : "initial"}
+        variants={scaleInView}
+        className="inline-flex items-center justify-center p-0.5 mb-0 text-sm font-medium text-gray-900 rounded-xl group bg-gradient-to-br from-verthem-900 via-transparent to-verthem-900 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+      >
+        {item.header}
+      </motion.div>
     </div>
   );
 };
-const FeatureImgTwo = () => {
-  return (
-    <div className="flex flex-1 relative dark:bg-dot-white/[0.2] bg-dot-black/[0.2] justify-center w-full h-full min-h-[440px] rounded-xl overflow-hidden">
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-100 to-cyan-100 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
-      <Image
-        src="/images/homepage/feat-2-cols.svg"
-        alt="avatar"
-        height="580"
-        width="780"
-        className="object-cover mt-2 z-10"
-      />
-    </div>
+const FeatureImgOne = () => {
+  const featImgV1 = {
+    initial: {
+      x: 0,
+    },
+    animate: {
+      x: 10,
+      rotate: -5,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+  const featImgV2 = {
+    initial: {
+      x: 0,
+    },
+    animate: {
+      x: -10,
+      rotate: 5,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      initial="initial"
+      whileHover="animate"
+      className="flex flex-1 justify-center w-full h-full max-h-[440px] rounded-xl bg-gradient-to-br from-indigo-100 to-cyan-50 overflow-hidden"
+    >
+      <motion.div variants={featImgV1} className="mt-8 -mb-24 -mr-24">
+        <Image
+          src="/images/homepage/feat-1-alignment.svg"
+          alt="avatar"
+          height="534"
+          width="400"
+        />
+      </motion.div>
+      <motion.div variants={featImgV2} className="mt-16 -mr-16">
+        <Image
+          src="/images/homepage/feat-1-color.svg"
+          alt="avatar"
+          height="330"
+          width="360"
+        />
+      </motion.div>
+    </motion.div>
+  );
+};
+const FeatureImgTwo = () => {
+  const featImgV1 = {
+    initial: {
+      x: 0,
+      scale: 1.1,
+    },
+    animate: {
+      y: 10,
+      rotate: -3,
+      scale: 1.2,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      initial="initial"
+      whileHover="animate"
+      className="flex flex-1 justify-center w-full h-full min-h-[440px] rounded-xl bg-gradient-to-br from-cyan-50 to-indigo-200 overflow-hidden"
+    >
+      <motion.div variants={featImgV1} className="mt-14">
+        <Image
+          src="/images/homepage/feat-2-cols.svg"
+          alt="avatar"
+          height="480"
+          width="680"
+          className="object-cover"
+        />
+      </motion.div>
+    </motion.div>
   );
 };
 

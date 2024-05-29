@@ -1,36 +1,55 @@
+"use client";
+
 import React from "react";
-import { BentoGrid, BentoGridItem } from "@/components/homepage/ui/bento-grid";
-import { Krona_One } from "next/font/google";
 import Image from "next/image";
+import { Krona_One } from "next/font/google";
+import { BentoGrid, BentoGridItem } from "@/components/homepage/ui/bento-grid";
+import { motion } from "framer-motion";
+import { scaleInView } from "@/utils/framer-variants";
+import { useInViewHook } from "@/hooks/homepage-hooks";
 
 const kronaOne = Krona_One({ weight: "400", subsets: ["latin"] });
 
 export default function ProductSection() {
+  const { ref, inView } = useInViewHook();
+
   return (
-    <section className="product-section">
-      <div className="mb-28">
-        <div className="mb-8 text-center">
-          <span
-            className={`${kronaOne.className} text-md uppercase text-[#00CAF8] pb-4`}
+    <section ref={ref} className="product-section">
+      <motion.div
+        initial="initial"
+        animate={inView ? "animate" : "initial"}
+        className="mb-28"
+      >
+        <div className="mb-14 text-center">
+          <motion.span
+            variants={scaleInView}
+            className={`${kronaOne.className} text-md uppercase text-[#00CAF8]`}
           >
             Powerfull Visual Builder
-          </span>
-          <h2 className="text-4xl font-medium">
+          </motion.span>
+          <motion.h2
+            variants={scaleInView}
+            className="mt-2 text-4xl font-semibold bg-gradient-to-t from-indigo-900 via-indigo-950 to-slate-900 bg-clip-text text-transparent"
+          >
             Create Stunning Campaign Pages With Ease
-          </h2>
+          </motion.h2>
         </div>
-        <BentoGrid>
-          {items.map((item, i) => (
-            <BentoGridItem
-              key={i}
-              title={item.title}
-              description={item.description}
-              header={item.header}
-              className={i === 3 || i === 6 ? "md:col-span-2" : ""}
-            />
-          ))}
-        </BentoGrid>
-      </div>
+        <motion.div variants={scaleInView}>
+          <BentoGrid>
+            {items.map((item, i) => (
+              <BentoGridItem
+                key={i}
+                title={item.title}
+                description={item.description}
+                header={item.header}
+                className={
+                  i === Math.floor(items.length / 2) ? "middle-item" : ""
+                }
+              />
+            ))}
+          </BentoGrid>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
