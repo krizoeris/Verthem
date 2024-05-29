@@ -24,6 +24,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        krona: ["var(--font-krona)"],
+      },
       fontSize: {
         sm: ["12px", "18px"],
         base: ["14px", "20px"],

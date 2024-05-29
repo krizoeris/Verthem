@@ -2,13 +2,10 @@
 
 import React from "react";
 import Image from "next/image";
-import { Krona_One } from "next/font/google";
 import { BentoGrid, BentoGridItem } from "@/components/homepage/ui/bento-grid";
 import { motion } from "framer-motion";
 import { scaleInView } from "@/utils/framer-variants";
 import { useInViewHook } from "@/hooks/homepage-hooks";
-
-const kronaOne = Krona_One({ weight: "400", subsets: ["latin"] });
 
 export default function ProductSection() {
   const { ref, inView } = useInViewHook();
@@ -23,7 +20,7 @@ export default function ProductSection() {
         <div className="mb-14 text-center">
           <motion.span
             variants={scaleInView}
-            className={`${kronaOne.className} text-md uppercase text-[#00CAF8]`}
+            className="font-krona text-md uppercase text-[#00CAF8]"
           >
             Powerfull Visual Builder
           </motion.span>
