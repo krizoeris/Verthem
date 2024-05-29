@@ -6,7 +6,7 @@
 import { useInView, IntersectionOptions } from "react-intersection-observer";
 
 export const useInViewHook = (
-  options: IntersectionOptions = { threshold: 0.5 },
+  options: IntersectionOptions = { threshold: 0.3 },
 ) => {
   const [ref, inView] = useInView(options);
   return { ref, inView };

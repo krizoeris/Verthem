@@ -31,7 +31,7 @@ const FeatureItem = ({ item }: FeatureItemProps) => {
   return (
     <div
       ref={ref}
-      className="grid lg:grid-cols-2 gap-12 mb-16 even:grid-cols-reverse"
+      className="grid lg:grid-cols-2 gap-12 mb-16 lg:even:grid-cols-reverse"
     >
       <motion.div
         initial="initial"
@@ -56,7 +56,7 @@ const FeatureItem = ({ item }: FeatureItemProps) => {
         <motion.a
           variants={scaleInView}
           href="/signup"
-          className="verthem-btn w-fit rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white"
+          className="verthem-btn w-fit rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white hover:bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none "
         >
           Start building for free
         </motion.a>
@@ -65,7 +65,7 @@ const FeatureItem = ({ item }: FeatureItemProps) => {
         initial="initial"
         animate={inView ? "animate" : "initial"}
         variants={scaleInView}
-        className="inline-flex items-center justify-center p-0.5 mb-0 text-sm font-medium text-gray-900 rounded-xl group bg-gradient-to-br from-verthem-900 via-transparent to-verthem-900 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+        className="order-1 lg:order-2 inline-flex items-center justify-center p-0.5 mb-0 text-sm font-medium text-gray-900 rounded-xl group bg-gradient-to-br from-verthem-900 via-transparent to-verthem-900 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white "
       >
         {item.header}
       </motion.div>
@@ -109,16 +109,20 @@ const FeatureImgOne = () => {
         <Image
           src="/images/homepage/feat-1-alignment.svg"
           alt="avatar"
-          height="534"
-          width="400"
+          height={484}
+          width={350}
+          style={{ boxShadow: "-11.2px 11.2px 22.4px 0px rgba(0, 0, 0, 0.08)" }}
+          className="rounded-xl"
         />
       </motion.div>
       <motion.div variants={featImgV2} className="mt-16 -mr-16">
         <Image
           src="/images/homepage/feat-1-color.svg"
           alt="avatar"
-          height="330"
-          width="360"
+          height={350}
+          width={380}
+          style={{ boxShadow: "-11.2px 11.2px 22.4px 0px rgba(0, 0, 0, 0.08)" }}
+          className="rounded-xl"
         />
       </motion.div>
     </motion.div>
@@ -144,7 +148,7 @@ const FeatureImgTwo = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 justify-center w-full h-full min-h-[440px] rounded-xl bg-gradient-to-br from-cyan-50 to-indigo-200 overflow-hidden"
+      className="flex flex-1 justify-center w-full h-full lg:min-h-[440px] rounded-xl bg-gradient-to-br from-cyan-50 to-indigo-200 overflow-hidden"
     >
       <motion.div variants={featImgV1} className="mt-14">
         <Image
@@ -153,6 +157,7 @@ const FeatureImgTwo = () => {
           height="480"
           width="680"
           className="object-cover"
+          style={{ boxShadow: "0px 2.8px 5.6px 0px rgba(0, 0, 0, 0.25)" }}
         />
       </motion.div>
     </motion.div>

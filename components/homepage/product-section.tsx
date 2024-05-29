@@ -57,9 +57,10 @@ const ProductImgOne = () => {
       <Image
         src="/images/homepage/vt-learning.svg"
         alt="avatar"
-        height="540"
-        width="260"
+        height={540}
+        width={260}
         className="object-cover -mt-2"
+        style={{ boxShadow: "0px 1.24px 2.48px 0px rgba(0, 0, 0, 0.25)" }}
       />
     </div>
   );
@@ -70,9 +71,10 @@ const ProductImgTwo = () => {
       <Image
         src="/images/homepage/vt-creativity.svg"
         alt="avatar"
-        height="330"
-        width="278"
+        height={330}
+        width={278}
         className="-mb-10"
+        style={{ boxShadow: "0px 0.35px 0.7px 0px rgba(0, 0, 0, 0.25)" }}
       />
     </div>
   );
@@ -83,8 +85,8 @@ const ProductImgThree = () => {
       <Image
         src="/images/homepage/vt-integration.svg"
         alt="avatar"
-        height="130"
-        width="157"
+        height={130}
+        width={157}
         className=""
       />
     </div>

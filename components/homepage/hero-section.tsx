@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export default function HeroBanner() {
   return (
     <section className="hero-section">
-      <div className="flex flex-col justify-center items-center relative mb-44">
+      <div className="flex flex-col justify-center items-center relative mt-16 mb-28 lg:mb-44">
         <div className="pt-32 pb-10">
           <motion.h1
             initial={{ opacity: 0, y: 100 }}
@@ -41,7 +41,7 @@ export default function HeroBanner() {
                 duration: 0.9,
               }}
               href="#"
-              className="mx-2 verthem-btn flex items-center whitespace-nowrap rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white"
+              className="mx-2 verthem-btn flex items-center whitespace-nowrap rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white hover:bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none"
             >
               Start building for free
             </motion.a>
@@ -55,7 +55,7 @@ export default function HeroBanner() {
                 duration: 0.7,
               }}
               href="#"
-              className="mx-2 verthem-btn-outline flex items-center whitespace-nowrap rounded-[8px] border-2 border-[#00CAF8] text-[#00CAF8] px-5 py-2 font-medium"
+              className="mx-2 verthem-btn-outline flex items-center whitespace-nowrap rounded-[8px] border-2 border-[#00CAF8] text-[#00CAF8] px-5 py-2 font-medium hover:bg-gradient-to-r from-cyan-100 to-verthem-100 hover:underline underline-offset-4"
             >
               See demo
             </motion.a>
@@ -68,7 +68,12 @@ export default function HeroBanner() {
           transition={{ delay: 0.325 }}
         >
           <Tilt tiltReverse={true}>
-            <img src="/images/homepage/vt-hero.svg" alt="" />
+            <img
+              src="/images/homepage/vt-hero.svg"
+              alt=""
+              style={{ boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.25)" }}
+              className="rounded-lg lg:rounded-3xl"
+            />
           </Tilt>
         </motion.div>
       </div>

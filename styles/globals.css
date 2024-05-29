@@ -103,6 +103,7 @@
 
 @layer components {
   .verthem-homepage nav a,
+  .verthem-homepage .nav-auth a,
   .verthem-homepage footer a {
     @apply text-base lg:text-[16px] tracking-wide;
   }
@@ -145,6 +146,12 @@
 
     .verthem-homepage .grid-cols-reverse > :nth-child(2) {
       grid-area: second;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .verthem-homepage .marquee-inner span {
+      @apply text-[16vw];
     }
   }
 }
