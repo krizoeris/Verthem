@@ -1,4 +1,10 @@
 import { Outfit } from "next/font/google";
+import Footer from "@/components/homepage/footer";
+import Header from "@/components/homepage/header";
+import HeroSection from "@/components/homepage/hero-section";
+import ProductSection from "@/components/homepage/product-section";
+import MarqueeText from "@/components/homepage/ui/marquee-text";
+import FeaturesSection from "@/components/homepage/features-section";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -10,7 +16,14 @@ export default function HomePage() {
       <div className="fixed inset-0 h-full bg-clip-content bg-grid-slate-200/[0.4] dark:bg-grid-white/[0.2]"></div>
 
       <div className="relative z-10 min-h-screen flex flex-col">
-        <main className="container flex-grow"></main>
+        <Header />
+        <main className="container flex-grow">
+          <HeroSection />
+          <ProductSection />
+          <MarqueeText />
+          <FeaturesSection />
+        </main>
+        <Footer />
       </div>
     </div>
   );

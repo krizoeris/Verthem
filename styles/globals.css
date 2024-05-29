@@ -93,11 +93,55 @@
   }
 
   .verthem-homepage p {
-    @apply text-[18px] font-light tracking-wide;
+    @apply text-[16px] lg:text-[18px] tracking-wide leading-6 text-slate-500 font-light;
   }
 
   .verthem-homepage a {
-    @apply text-[16px] font-medium tracking-wide;
+    @apply text-[16px] lg:text-[18px]  tracking-wide;
+  }
+}
+
+@layer components {
+  .verthem-homepage nav a,
+  .verthem-homepage footer a {
+    @apply text-base lg:text-[16px] tracking-wide;
+  }
+
+  .verthem-homepage .marquee-inner span {
+    @apply text-[10vw] px-[2vw] uppercase leading-normal;
+  }
+
+  @media (min-width: 1920px) {
+    .verthem-homepage .marquee-inner span {
+      @apply text-[6vw] px-[1.3vw];
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .verthem-homepage .marquee-inner span {
+      @apply text-[4vw] px-[1.3vw];
+    }
+  }
+
+  .verthem-homepage .marquee-inner span {
+    -webkit-text-stroke: 1px;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media (min-width: 768px) {
+    .verthem-homepage .grid-cols-reverse {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "second first";
+    }
+
+    .verthem-homepage .grid-cols-reverse > :nth-child(1) {
+      grid-area: first;
+    }
+
+    .verthem-homepage .grid-cols-reverse > :nth-child(2) {
+      grid-area: second;
+    }
   }
 }
 #verthem-logo,
