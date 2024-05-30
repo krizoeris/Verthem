@@ -147,11 +147,29 @@
     .verthem-homepage .grid-cols-reverse > :nth-child(2) {
       grid-area: second;
     }
+
+    .verthem-homepage .feat-img-01 {
+      @apply max-w-[400px];
+    }
+
+    .verthem-homepage .feat-img-02 {
+      @apply max-w-[320px];
+    }
   }
 
   @media (max-width: 767px) {
     .verthem-homepage .marquee-inner span {
       @apply text-[16vw];
+    }
+  }
+
+  @media (max-width: 640px) {
+    .verthem-homepage .feat-img-01 {
+      @apply max-w-[240px];
+    }
+
+    .verthem-homepage .feat-img-02 {
+      @apply max-w-[180px];
     }
   }
 }

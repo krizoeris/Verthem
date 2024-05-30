@@ -115,10 +115,9 @@ const FeatureImgOne = () => {
           style={{
             width: "auto",
             height: "auto",
-            maxWidth: "400px",
             boxShadow: "-11.2px 11.2px 22.4px 0px rgba(0, 0, 0, 0.08)",
           }}
-          className="rounded-xl"
+          className="rounded-xl feat-img-01"
         />
       </motion.div>
       <motion.div variants={featImgV2} className="mt-16 -mr-16">
@@ -130,10 +129,9 @@ const FeatureImgOne = () => {
           style={{
             width: "auto",
             height: "auto",
-            maxWidth: "320px",
             boxShadow: "-11.2px 11.2px 22.4px 0px rgba(0, 0, 0, 0.08)",
           }}
-          className="rounded-xl"
+          className="rounded-xl feat-img-02"
         />
       </motion.div>
     </motion.div>
@@ -167,7 +165,7 @@ const FeatureImgTwo = () => {
           alt="avatar"
           height="480"
           width="680"
-          className="object-cover"
+          className="object-cover feat-img-03"
           style={{ boxShadow: "0px 2.8px 5.6px 0px rgba(0, 0, 0, 0.25)" }}
         />
       </motion.div>
