@@ -3,9 +3,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { signOut } from "@/auth";
 
-// Import Types
-import { MenuItem } from "@/types/definitions";
-
 // Import Components
 import MenuList from "@/components/dashboard/menu/MenuList";
 
@@ -30,7 +27,7 @@ const iconMapping = {
 
 export default function Aside() {
   // Menu List
-  const menuList: MenuItem[] = [
+  const menuList: Global.Menu.MenuItem[] = [
     {
       title: "Dashboard",
       icon: "Home",
