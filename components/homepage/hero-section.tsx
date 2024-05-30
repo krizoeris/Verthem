@@ -13,7 +13,7 @@ export default function HeroBanner() {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.175 }}
-            className="mb-4 text-center text-[44px] md:text-[68px] xl:text-[86px] font-semibold leading-none bg-gradient-to-t from-indigo-900 via-indigo-950 to-slate-900 dark:from-white/40 dark:to-white bg-clip-text text-transparent"
+            className="mb-4 text-center text-[44px] md:text-[68px] xl:text-[86px] font-semibold leading-none bg-gradient-to-t from-indigo-900 via-indigo-950 to-slate-900 dark:from-cyan-100/80 dark:to-white bg-clip-text text-transparent"
           >
             Elevate Your Marketing <br className="hidden md:inline" /> With
             Verthem
@@ -41,7 +41,7 @@ export default function HeroBanner() {
                 duration: 0.9,
               }}
               href="#"
-              className="mx-2 verthem-btn flex items-center whitespace-nowrap rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white hover:bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none"
+              className="mx-2 verthem-btn flex items-center whitespace-nowrap rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white hover:bg-gradient-to-r from-cyan-500 to-blue-500 "
             >
               Start building for free
             </motion.a>
@@ -55,7 +55,7 @@ export default function HeroBanner() {
                 duration: 0.7,
               }}
               href="#"
-              className="mx-2 verthem-btn-outline flex items-center whitespace-nowrap rounded-[8px] border-2 border-[#00CAF8] text-[#00CAF8] px-5 py-2 font-medium hover:bg-gradient-to-r from-cyan-100 to-verthem-100 hover:underline underline-offset-4"
+              className="mx-2 verthem-btn-outline flex items-center whitespace-nowrap rounded-[8px] border-2 border-[#00CAF8] text-[#00CAF8] px-5 py-2 font-medium hover:bg-gradient-to-r from-cyan-100 to-verthem-100 dark:from-cyan-50/5 dark:to-verthem-900/5 hover:underline underline-offset-4"
             >
               See demo
             </motion.a>

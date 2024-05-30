@@ -50,13 +50,13 @@ const FeatureItem = ({ item }: FeatureItemProps) => {
         >
           {item.title}
         </motion.h2>
-        <motion.p variants={scaleInView} className="mb-10">
+        <motion.p variants={scaleInView} className="mb-10 dark:text-slate-400">
           {item.description}
         </motion.p>
         <motion.a
           variants={scaleInView}
           href="/signup"
-          className="verthem-btn w-fit rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white hover:bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none "
+          className="verthem-btn w-fit rounded-[8px] bg-[#00CAF8] px-5 py-3 font-medium text-white hover:bg-gradient-to-r from-cyan-500 to-blue-500 "
         >
           Start building for free
         </motion.a>
@@ -65,7 +65,7 @@ const FeatureItem = ({ item }: FeatureItemProps) => {
         initial="initial"
         animate={inView ? "animate" : "initial"}
         variants={scaleInView}
-        className="order-1 lg:order-2 inline-flex items-center justify-center p-0.5 mb-0 text-sm font-medium text-gray-900 rounded-xl group bg-gradient-to-br from-verthem-900 via-transparent to-verthem-900 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white "
+        className="order-1 lg:order-2 inline-flex items-center justify-center p-0.5 mb-0 text-sm font-medium text-gray-900 rounded-xl group bg-gradient-to-br from-verthem-900 via-transparent to-verthem-900 dark:from-verthem-900/30 dark:via-transparent dark:to-verthem-900/30"
       >
         {item.header}
       </motion.div>
@@ -103,15 +103,21 @@ const FeatureImgOne = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 justify-center w-full h-full max-h-[440px] rounded-xl bg-gradient-to-br from-indigo-100 to-cyan-50 overflow-hidden"
+      className="flex flex-1 justify-center w-full h-full max-h-[440px] rounded-xl bg-gradient-to-br from-indigo-100 to-cyan-50 dark:from-indigo-100/10 dark:to-cyan-50/5 overflow-hidden"
     >
       <motion.div variants={featImgV1} className="mt-8 -mb-24 -mr-24">
         <Image
           src="/images/homepage/feat-1-alignment.svg"
           alt="avatar"
+          priority
           height={484}
           width={350}
-          style={{ boxShadow: "-11.2px 11.2px 22.4px 0px rgba(0, 0, 0, 0.08)" }}
+          style={{
+            width: "auto",
+            height: "auto",
+            maxWidth: "400px",
+            boxShadow: "-11.2px 11.2px 22.4px 0px rgba(0, 0, 0, 0.08)",
+          }}
           className="rounded-xl"
         />
       </motion.div>
@@ -121,7 +127,12 @@ const FeatureImgOne = () => {
           alt="avatar"
           height={350}
           width={380}
-          style={{ boxShadow: "-11.2px 11.2px 22.4px 0px rgba(0, 0, 0, 0.08)" }}
+          style={{
+            width: "auto",
+            height: "auto",
+            maxWidth: "320px",
+            boxShadow: "-11.2px 11.2px 22.4px 0px rgba(0, 0, 0, 0.08)",
+          }}
           className="rounded-xl"
         />
       </motion.div>
@@ -148,7 +159,7 @@ const FeatureImgTwo = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 justify-center w-full h-full lg:min-h-[440px] rounded-xl bg-gradient-to-br from-cyan-50 to-indigo-200 overflow-hidden"
+      className="flex flex-1 justify-center w-full h-full lg:min-h-[440px] rounded-xl bg-gradient-to-br from-cyan-50 to-indigo-200 dark:from-indigo-100/10 dark:to-cyan-50/5 overflow-hidden"
     >
       <motion.div variants={featImgV1} className="mt-14">
         <Image

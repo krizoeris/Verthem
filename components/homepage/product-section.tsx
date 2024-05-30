@@ -26,7 +26,7 @@ export default function ProductSection() {
           </motion.span>
           <motion.h2
             variants={scaleInView}
-            className="mt-2 text-4xl font-semibold bg-gradient-to-t from-indigo-900 via-indigo-950 to-slate-900 bg-clip-text text-transparent"
+            className="mt-2 text-4xl font-semibold bg-gradient-to-t from-indigo-900 via-indigo-950 to-slate-900 dark:from-cyan-100/80 dark:to-white bg-clip-text text-transparent"
           >
             Create Stunning Campaign Pages With Ease
           </motion.h2>
@@ -60,7 +60,11 @@ const ProductImgOne = () => {
         height={540}
         width={260}
         className="object-cover -mt-2"
-        style={{ boxShadow: "0px 1.24px 2.48px 0px rgba(0, 0, 0, 0.25)" }}
+        style={{
+          width: "auto",
+          height: "auto",
+          boxShadow: "0px 1.24px 2.48px 0px rgba(0, 0, 0, 0.25)",
+        }}
       />
     </div>
   );
@@ -74,7 +78,12 @@ const ProductImgTwo = () => {
         height={330}
         width={278}
         className="-mb-10"
-        style={{ boxShadow: "0px 0.35px 0.7px 0px rgba(0, 0, 0, 0.25)" }}
+        style={{
+          width: "auto",
+          height: "auto",
+          maxWidth: "280px",
+          boxShadow: "0px 0.35px 0.7px 0px rgba(0, 0, 0, 0.25)",
+        }}
       />
     </div>
   );
@@ -88,6 +97,7 @@ const ProductImgThree = () => {
         height={130}
         width={157}
         className=""
+        style={{ width: "auto", height: "auto" }}
       />
     </div>
   );
