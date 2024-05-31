@@ -1,9 +1,8 @@
 import { FC } from "react";
 import Link from "next/link";
-import { MenuItem } from "@/types/definitions";
 
 type MenuListProps = {
-    menuList: MenuItem[];
+    menuList: Global.Menu.MenuItem[];
     iconMapping: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>>;
     pathName: string;
 };

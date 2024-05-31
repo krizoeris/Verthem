@@ -5,9 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "@/auth";
 
-// Import Types
-import { MenuItem } from "@/types/definitions";
-
 // Import Components
 import MenuList from "@/components/dashboard/menu/MenuList";
 
@@ -35,7 +32,7 @@ export default function Aside() {
   const pathName = usePathname();
 
   // Menu List
-  const menuList: MenuItem[] = [
+  const menuList: Global.Menu.MenuItem[] = [
     {
       title: "Dashboard",
       icon: "Home",
