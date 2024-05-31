@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import SignupForm from "@/components/auth/SignUpForm";
 import { Metadata } from "next";
+import { LoginProvider } from "@/components/auth/LoginProvider";
+
 
 export const metadata: Metadata = {
   title: "Sign Up",
@@ -25,9 +27,7 @@ export default function SignUpPage() {
           </span>
           <div className="flex-grow border-t border-muted-foreground"></div>
         </div>
-        <Button variant="outline" className="w-full">
-          Login with Google
-        </Button>
+        <LoginProvider provider='google'/>
       </div>
       <div className="mt-4 text-center text-sm">
         Already have an account?{" "}

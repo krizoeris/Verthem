@@ -6,8 +6,10 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
+import { sql } from "drizzle-orm/sql";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
+import { User } from "@/types/definitions";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -118,4 +120,64 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+export async function getUser(email: string): Promise<User | undefined> {
+  // return undefined;
+  try {
+    const result = await db
+    .select()
+    .from(Users)
+    .where(eq(Users.email, email));
+
+    if (result.length === 0) {
+      return undefined;
+    }
+
+    const user = result[0];
+    return user as User;
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    throw new Error("Failed to fetch user.");
+  }
+}
+
+export async function createUserSSO(
+  first_name: string,
+  last_name: string,
+  email: string,
+  picture: string,
+): Promise<void> {
+
+
+  const id = crypto.randomUUID();
+  const date = new Date();
+
+  try {
+    const data = await db
+      .insert(Users)
+      .values({
+        id: id,
+        first_name: first_name || '',
+        last_name: last_name,
+        email: email,
+        password: '',
+        image: picture,
+        created_at: date,
+        updated_at: date,
+      })
+      .returning();
+
+    return 
+    // return {
+    //   success: data,
+    //   message: "User successfully created",
+    // };
+  } catch (error) {
+    throw error
+  }
+  //  finally {
+  //   revalidatePath("/dashboard");
+  //   redirect("/dashboard");
+  // }
 }
