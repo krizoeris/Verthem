@@ -1,8 +1,8 @@
-'use client'
-import React from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { usePathname } from 'next/navigation'
+"use client";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { signOut } from "@/auth";
 
 // Import Types
@@ -33,7 +33,7 @@ const iconMapping = {
 export default function Aside() {
   // Pass pathname to MenuListProps
   const pathName = usePathname();
-  
+
   // Menu List
   const menuList: MenuItem[] = [
     {
@@ -72,11 +72,15 @@ export default function Aside() {
       </div>
 
       <div className="flex flex-col items-center">
-        <MenuList menuList={menuList} iconMapping={iconMapping} pathName={pathName} />
+        <MenuList
+          menuList={menuList}
+          iconMapping={iconMapping}
+          pathName={pathName}
+        />
       </div>
 
       <div>
-        <form
+        {/* <form
           action={async () => {
             "use server";
             await signOut();
@@ -87,7 +91,12 @@ export default function Aside() {
               <LogOut className="w-6 h-6" />
             </button>
           </div>
-        </form>
+        </form> */}
+        <div className="flex items-center justify-center text-verthem-900 hover:text-verthem-700 hover:transition-all">
+          <button className="w-[24px] h-[24px]">
+            <LogOut className="w-6 h-6" />
+          </button>
+        </div>
       </div>
     </div>
   );
