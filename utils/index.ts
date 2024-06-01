@@ -23,9 +23,11 @@ const campaignStatusClass = (status: string): string => {
  * @param isoString
  * @returns
  */
-function formatDateTime(isoString: string | number | Date) {
+function formatDateTime(isoString: string | number | Date): string {
   const date = new Date(isoString);
-  const options = {
+
+  // Define formatting options
+  const options: Intl.DateTimeFormatOptions = {
     month: "short",
     day: "numeric",
     hour: "numeric",
@@ -34,7 +36,9 @@ function formatDateTime(isoString: string | number | Date) {
     timeZoneName: "short",
   };
 
+  // Format the date using the specified options
   const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date);
+  // Return the formatted date string
   return `${formattedDate}`;
 }
 
