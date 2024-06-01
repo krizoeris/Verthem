@@ -1,2 +1,0 @@
-// Remove this file
-// Add related apis inside this 'api' folder

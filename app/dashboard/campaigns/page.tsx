@@ -1,19 +1,25 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import PageTitle from "@/components/dashboard/PageTitle";
-
 import CampaignsCard from "@/components/dashboard/campaigns/CampaignsCard";
 
 type CampaignListProps = {
-  hasCampaigns: boolean;
+  campaigns: Global.Campaign.Campaign[];
 };
 
-const CampaignList: React.FC<CampaignListProps> = ({ hasCampaigns }) => {
-  if (hasCampaigns) {
+const CampaignList: React.FC<CampaignListProps> = ({ campaigns }) => {
+  if (campaigns.length > 0) {
     return (
-      // TODO: pass values of the campaigns and loop thru the list
-      <CampaignsCard />
+      <>
+        <Card className="h-full p-10 flex flex-col items-center gap-4 bg-background">
+          {campaigns.map((campaign) => (
+            <CampaignsCard key={campaign.id} campaign={campaign} />
+          ))}
+        </Card>
+      </>
     );
   } else {
     return (
@@ -38,15 +44,30 @@ const CampaignList: React.FC<CampaignListProps> = ({ hasCampaigns }) => {
   }
 };
 
-export default function CampaignsPage() {
+const CampaignsPage: React.FC = () => {
+  const [campaigns, setCampaigns] = useState<Global.Campaign.Campaign[]>([]);
   const subText: string = "Display all related campaigns here.";
+
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      try {
+        const response = await fetch("/api/getCampaigns");
+        const result = await response.json();
+        setCampaigns(result);
+      } catch (error) {
+        console.error("Failed to fetch campaigns:", error);
+      }
+    };
+
+    fetchCampaigns();
+  }, []);
 
   return (
     <section className="h-full flex flex-col gap-4">
       <PageTitle subText={subText} />
-
-      {/* Check if database has campaign values */}
-      <CampaignList hasCampaigns={true} />
+      <CampaignList campaigns={campaigns} />
     </section>
   );
-}
+};
+
+export default CampaignsPage;
