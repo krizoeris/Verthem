@@ -18,9 +18,11 @@ const menuItems = [
 const MobileMenu = ({
   title,
   href,
+  onClick,
 }: {
   title: string;
   href: LinkProps["href"];
+  onClick: () => void;
 }) => {
   const mobileMenuVars = {
     initial: {
@@ -41,7 +43,7 @@ const MobileMenu = ({
 
   return (
     <motion.div variants={mobileMenuVars} className="font-krona uppercase ">
-      <Link href={href}>
+      <Link href={href} onClick={onClick}>
         <span className="text-3xl text-slate-950">{title}</span>
       </Link>
     </motion.div>
@@ -67,6 +69,10 @@ export default function Header() {
 
   const toggleMenu = () => {
     setOpen((prevOpen) => !prevOpen);
+  };
+
+  const closeMenu = () => {
+    setOpen(false);
   };
 
   const menuVars = {
@@ -219,6 +225,7 @@ export default function Header() {
                         key={index}
                         title={item.name}
                         href={item.href}
+                        onClick={closeMenu}
                       />
                     </div>
                   ))}

@@ -25,7 +25,7 @@ export default function HomePage() {
       disableTransitionOnChange
     >
       <div
-        className={`${outfit.className} ${kronaOne.variable} verthem-homepage overflow-x-hidden min-h-screen bg-gradient-to-bl from-indigo-200 via-teal-100/10 to-indigo-200 dark:from-cyan-950 dark:via-slate-950 dark:to-blue-950`}
+        className={`${outfit.className} ${kronaOne.variable} !scroll-smooth verthem-homepage overflow-x-hidden min-h-screen bg-gradient-to-bl from-indigo-200 via-teal-100/10 to-indigo-200 dark:from-cyan-950 dark:via-slate-950 dark:to-blue-950`}
       >
         <div className="fixed inset-0 h-full bg-clip-content bg-grid-slate-200/[0.4] dark:bg-grid-slate-900/[0.4] "></div>
 
