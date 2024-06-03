@@ -41,22 +41,22 @@ export default function Aside() {
     {
       title: "Campaigns",
       icon: "LayoutTemplate",
-      link: "/dashboard/campaigns",
+      link: "/campaigns",
     },
     {
       title: "Integration",
       icon: "MousePointerClick",
-      link: "/dashboard/integration",
+      link: "/integration",
     },
     {
       title: "Domains",
       icon: "Anchor",
-      link: "/dashboard/domains",
+      link: "/domains",
     },
     {
       title: "Settings",
       icon: "Settings",
-      link: "/dashboard/settings",
+      link: "/settings",
     },
   ];
 

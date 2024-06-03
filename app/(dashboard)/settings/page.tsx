@@ -1,7 +1,7 @@
-import React from 'react';
-import PageTitle from '@/components/dashboard/PageTitle';
+import React from "react";
+import PageTitle from "@/components/dashboard/PageTitle";
 
-export default function IntegrationsPage() {
+export default function SettingsPage() {
   const subText: string = "Display all related content here.";
 
   return (

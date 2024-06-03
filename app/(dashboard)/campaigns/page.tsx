@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import PageTitle from "@/components/dashboard/PageTitle";
-import CampaignsCard from "@/components/dashboard/campaigns/CampaignsCard";
+import CampaignsCard from "@/components/campaigns/CampaignsCard";
 
 type CampaignListProps = {
   campaigns: Global.Campaign.Campaign[];
@@ -14,7 +14,7 @@ const CampaignList: React.FC<CampaignListProps> = ({ campaigns }) => {
   if (campaigns.length > 0) {
     return (
       <>
-        <Card className="h-full p-10 flex flex-col items-center gap-4 bg-background">
+        <Card className="h-screen p-10 flex flex-col items-center gap-4 bg-background">
           {campaigns.map((campaign) => (
             <CampaignsCard key={campaign.id} campaign={campaign} />
           ))}
@@ -65,7 +65,9 @@ const CampaignsPage: React.FC = () => {
   return (
     <section className="h-full flex flex-col gap-4">
       <PageTitle subText={subText} />
-      <CampaignList campaigns={campaigns} />
+      <div className="h-full flex-grow overflow-y-scroll">
+        <CampaignList campaigns={campaigns} />
+      </div>
     </section>
   );
 };

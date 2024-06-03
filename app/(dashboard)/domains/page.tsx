@@ -1,7 +1,7 @@
-import React from 'react';
-import PageTitle from '@/components/dashboard/PageTitle';
+import React from "react";
+import PageTitle from "@/components/dashboard/PageTitle";
 
-export default function ProfilePage() {
+export default function DomainsPage() {
   const subText: string = "Display all related content here.";
 
   return (

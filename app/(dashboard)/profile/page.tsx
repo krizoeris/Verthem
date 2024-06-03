@@ -1,7 +1,7 @@
-import React from 'react';
-import PageTitle from '@/components/dashboard/PageTitle';
+import React from "react";
+import PageTitle from "@/components/dashboard/PageTitle";
 
-export default function DashboardPage() {
+export default function ProfilePage() {
   const subText: string = "Display all related content here.";
 
   return (
