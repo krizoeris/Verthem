@@ -14,3 +14,7 @@ export type MenuItem = {
   icon: string;
   link: string;
 };
+
+export type PageTitleProps = {
+  subText: string;
+};

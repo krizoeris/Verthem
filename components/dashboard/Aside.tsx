@@ -1,6 +1,8 @@
-import React from "react"
-import Image from "next/image"
-import Link from "next/link"
+"use client";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { signOut } from "@/auth";
 
 // Import Components
@@ -26,6 +28,9 @@ const iconMapping = {
 };
 
 export default function Aside() {
+  // Pass pathname to MenuListProps
+  const pathName = usePathname();
+
   // Menu List
   const menuList: Global.Menu.MenuItem[] = [
     {
@@ -34,29 +39,29 @@ export default function Aside() {
       link: "/dashboard",
     },
     {
-      title: "Pages",
+      title: "Campaigns",
       icon: "LayoutTemplate",
-      link: "/dashboard/campaigns",
+      link: "/campaigns",
     },
     {
       title: "Integration",
       icon: "MousePointerClick",
-      link: "/dashboard/integration",
+      link: "/integration",
     },
     {
       title: "Domains",
       icon: "Anchor",
-      link: "/dashboard/domains",
+      link: "/domains",
     },
     {
       title: "Settings",
       icon: "Settings",
-      link: "/dashboard/settings",
+      link: "/settings",
     },
   ];
 
   return (
-    <div className="flex flex-col justify-between pt-8 pb-8 pl-4 pr-4 max-w-[100px] w-[100px] bg-slate-900 text-neutral-50">
+    <div className="flex flex-col justify-between pt-8 pb-8 pl-3 pr-3 max-w-[100px] w-[100px] bg-slate-900 text-neutral-50">
       <div className="flex justify-center items-center">
         <Link href="/dashboard">
           <Image src="/images/logo.png" width={32} height={32} alt="logo" />
@@ -64,11 +69,15 @@ export default function Aside() {
       </div>
 
       <div className="flex flex-col items-center">
-        <MenuList menuList={menuList} iconMapping={iconMapping} />
+        <MenuList
+          menuList={menuList}
+          iconMapping={iconMapping}
+          pathName={pathName}
+        />
       </div>
 
       <div>
-        <form
+        {/* <form
           action={async () => {
             "use server";
             await signOut();
@@ -79,7 +88,12 @@ export default function Aside() {
               <LogOut className="w-6 h-6" />
             </button>
           </div>
-        </form>
+        </form> */}
+        <div className="flex items-center justify-center text-verthem-900 hover:text-verthem-700 hover:transition-all">
+          <button className="w-[24px] h-[24px]">
+            <LogOut className="w-6 h-6" />
+          </button>
+        </div>
       </div>
     </div>
   );

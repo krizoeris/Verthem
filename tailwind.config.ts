@@ -28,6 +28,7 @@ const config = {
         krona: ["var(--font-krona)"],
       },
       fontSize: {
+        xs: ["11px", "16px"],
         sm: ["12px", "18px"],
         base: ["14px", "20px"],
         lg: ["20px", "28px"],
@@ -35,12 +36,12 @@ const config = {
       },
       colors: {
         verthem: {
-          "900": "#52dfff",
-          "800": "#63e2ff",
-          "700": "#75e5ff",
-          "600": "#86e9ff",
-          "500": "#97ecff",
-          "400": "#a9efff",
+          900: "#52dfff",
+          800: "#63e2ff",
+          700: "#75e5ff",
+          600: "#86e9ff",
+          500: "#97ecff",
+          400: "#a9efff",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
