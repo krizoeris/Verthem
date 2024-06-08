@@ -21,7 +21,10 @@ const MenuList: FC<MenuListProps> = ({ menuList }) => {
   const pathName = usePathname();
 
   // Declare Icons for mapping
-  const iconMapping = {
+  const iconMapping: Record<
+    string,
+    React.ComponentType<React.SVGProps<SVGSVGElement>>
+  > = {
     Home,
     LayoutTemplate,
     MousePointerClick,
