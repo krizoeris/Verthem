@@ -1,14 +1,15 @@
-import '../envConfig'
+import "@/lib/env/envConfig";
+import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client";
 import * as schema from "./schema";
-import postgres from "postgres";
-import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
 
-if (!process.env.POSTGRES_URL) {
-  throw new Error("POSTGRES_URL environment variable is not defined");
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL environment variable is not defined");
 }
 
-const connection = postgres(process.env.POSTGRES_URL as string);
+const connect = createClient({
+  url: process.env.DATABASE_URL!,
+  authToken: process.env.DATABASE_AUTH_TOKEN,
+});
 
-export const db = drizzle(connection);
-
-
+export const db = drizzle(connect, { schema });

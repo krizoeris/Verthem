@@ -36,7 +36,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/db/migrations
-
 #vscode
 .vscode
+
+# Verthem Local Database
+verthem-local.db
+verthem-local.db-shm
+verthem-local.db-wal
+
+# Test
+/app/test
