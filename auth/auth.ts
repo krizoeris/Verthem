@@ -1,11 +1,11 @@
 import NextAuth, { AuthError } from "next-auth";
-import { authConfig } from "./auth.config";
+import { authConfig } from "../auth/auth.config";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import bcrypt from "bcrypt";
 import type { NextAuthConfig, Session } from "next-auth";
-import { createUserSSO, getUser } from "../actions/userActions";
+import { createUser, getUser } from "../actions/createUser";
 
 export const { handlers, auth, signIn } = NextAuth({
   ...authConfig,
@@ -55,7 +55,7 @@ export const { handlers, auth, signIn } = NextAuth({
           const existingUser = await getUser(user.email);
           if (!existingUser) {
             //set user here
-            await createUserSSO(
+            await createUser(
               profile?.name as string,
               profile?.email as string,
               profile?.picture,

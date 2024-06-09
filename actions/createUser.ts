@@ -20,7 +20,7 @@ export async function getUser(email: string): Promise<any> {
   }
 }
 
-export async function createUserSSO(
+export async function createUser(
   name: string,
   email: string,
   picture: string,
