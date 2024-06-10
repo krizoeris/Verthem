@@ -9,10 +9,8 @@ import {
 
 export const Users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
-  first_name: varchar("first_name").notNull(),
-  last_name: varchar("last_name").notNull(),
+  name: varchar("name").notNull(),
   email: varchar("email").notNull(),
-  password: varchar("password").notNull(),
   image: text("image"),
   created_at: timestamp("created_at", { mode: "date" }).notNull(),
   updated_at: timestamp("updated_at", { mode: "date" }).notNull(),

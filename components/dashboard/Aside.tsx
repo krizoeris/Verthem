@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut } from "@/auth";
+import { signOut } from "next-auth/react";
 
 // Import Components
 import MenuList from "@/components/dashboard/menu/MenuList";
@@ -79,7 +79,6 @@ export default function Aside() {
       <div>
         {/* <form
           action={async () => {
-            "use server";
             await signOut();
           }}
         >
@@ -91,7 +90,7 @@ export default function Aside() {
         </form> */}
         <div className="flex items-center justify-center text-verthem-900 hover:text-verthem-700 hover:transition-all">
           <button className="w-[24px] h-[24px]">
-            <LogOut className="w-6 h-6" />
+            <LogOut onClick={() => signOut()} className="w-6 h-6" />
           </button>
         </div>
       </div>

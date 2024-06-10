@@ -1,36 +1,31 @@
 import NextAuth, { AuthError } from "next-auth";
-import { authConfig } from "./auth.config";
-import Google from 'next-auth/providers/google';
+import { authConfig } from "../auth/auth.config";
+import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
-import { db } from "@/db";
-import { sql } from "drizzle-orm/sql";
-import { Users } from "@/db/schema";
-import { User } from "@/types/definitions";
 import bcrypt from "bcrypt";
-import type { NextAuthConfig, Session } from 'next-auth';
-import { createUserSSO, getUser } from "./actions/userActions";
+import type { NextAuthConfig, Session } from "next-auth";
+import { createUser, getUser } from "../actions/createUser";
 
-
-export const {handlers, auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn } = NextAuth({
   ...authConfig,
   providers: [
     Google({
       authorization: {
         params: {
-          access_type: 'offline',
-          prompt: 'consent',
+          access_type: "offline",
+          prompt: "consent",
           scope: [
-            'openid',
-            'https://www.googleapis.com/auth/userinfo.email',
-            'https://www.googleapis.com/auth/userinfo.profile',
+            "openid",
+            "https://www.googleapis.com/auth/userinfo.email",
+            "https://www.googleapis.com/auth/userinfo.profile",
             // and more scope urls
-          ].join(' '),
-          response: 'code',
+          ].join(" "),
+          response: "code",
         },
       },
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     Credentials({
       async authorize(credentials) {
@@ -51,21 +46,20 @@ export const {handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-  callbacks:{
+  callbacks: {
     async jwt({ token, user, account, profile }) {
-      console.log({ token, user })
+      console.log({ token, user, profile });
       // Initial sign in
-      if (account && user && profile ) {
-        if(account.provider === 'google' && profile.email){
-          const existingUser = await getUser(profile.email);
-          if(!existingUser){
+      if (account && user && profile) {
+        if (account.provider === "google" && user.email) {
+          const existingUser = await getUser(user.email);
+          if (!existingUser) {
             //set user here
-            await createUserSSO(
-              profile?.given_name as string,
-              profile?.family_name as string,
+            await createUser(
+              profile?.name as string,
               profile?.email as string,
-              profile?.picture
-            )
+              profile?.picture,
+            );
           }
         }
         return {
@@ -78,17 +72,17 @@ export const {handlers, auth, signIn, signOut } = NextAuth({
       } else if (Date.now() < Number(token.expires_at)) {
         return token;
       } else {
-        console.log('Access token expired getting new one');
+        console.log("Access token expired getting new one");
         try {
-          const response = await fetch('https://oauth2.googleapis.com/token', {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          const response = await fetch("https://oauth2.googleapis.com/token", {
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
               client_id: process.env.AUTH_GOOGLE_ID as string, // Type assertion
               client_secret: process.env.AUTH_GOOGLE_SECRET as string, // Type assertion
-              grant_type: 'refresh_token',
+              grant_type: "refresh_token",
               refresh_token: token.refresh_token as string, // Type assertion
             }),
-            method: 'POST',
+            method: "POST",
           });
 
           const tokens = await response.json();
@@ -104,14 +98,14 @@ export const {handlers, auth, signIn, signOut } = NextAuth({
             refresh_token: tokens.refresh_token ?? token.refresh_token,
           }; // updated inside our session-token cookie
         } catch (error) {
-          console.error('Error refreshing access token', error);
+          console.error("Error refreshing access token", error);
           // The error property will be used client-side to handle the refresh token error
-          return { ...token, error: 'RefreshAccessTokenError' as const };
+          return { ...token, error: "RefreshAccessTokenError" as const };
         }
       }
     },
     async session({ session, token }) {
-      console.log('Incoming session info: ', session);
+      console.log("Incoming session info: ", session);
       // This will be accessible in the client side using useSession hook
       // So becareful what you return here. Don't return sensitive data.
       // The auth() function should return jwt response but instead it returns
@@ -125,8 +119,8 @@ export const {handlers, auth, signIn, signOut } = NextAuth({
         accessTokenExpiresAt: Number(token.expires_at),
       } satisfies EnrichedSession;
     },
-  }
-}satisfies NextAuthConfig);
+  },
+} satisfies NextAuthConfig);
 
 export interface EnrichedSession extends Session {
   accessToken: string;
