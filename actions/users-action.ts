@@ -32,12 +32,11 @@ export async function createUser(
     const data = await db
       .insert(Users)
       .values({
-        id: id,
         name: name,
         email: email,
         image: picture,
-        created_at: date,
-        updated_at: date,
+        createdAt: date,
+        updatedAt: date,
       })
       .returning();
 

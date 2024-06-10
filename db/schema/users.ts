@@ -9,10 +9,8 @@ import { Workspaces } from "./workspaces";
 
 export const Users = sqliteTable("users", {
   id: integer("id").primaryKey(),
-  firstName: text("first_name").notNull(),
-  lastName: text("last_name").notNull(),
+  name: text("name").notNull(),
   email: text("email").notNull(),
-  password: text("password").notNull(),
   image: text("image"),
   createdAt: integer("created_at", { mode: "timestamp" }).default(
     sql`(strftime('%s', 'now'))`,

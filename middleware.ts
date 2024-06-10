@@ -1,9 +1,6 @@
 import NextAuth from "next-auth";
 import { NextResponse, NextRequest } from "next/server";
-import { authConfig } from "@/auth/auth.config";
-
-
-const { auth } = NextAuth(authConfig);
+import { auth } from "@/lib/auth";
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico|images).*)"],

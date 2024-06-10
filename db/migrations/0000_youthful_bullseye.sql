@@ -11,10 +11,8 @@ CREATE TABLE `campaigns` (
 --> statement-breakpoint
 CREATE TABLE `users` (
 	`id` integer PRIMARY KEY NOT NULL,
-	`first_name` text NOT NULL,
-	`last_name` text NOT NULL,
+	`name` text NOT NULL,
 	`email` text NOT NULL,
-	`password` text NOT NULL,
 	`image` text,
 	`created_at` integer DEFAULT (strftime('%s', 'now')),
 	`updated_at` integer DEFAULT (strftime('%s', 'now'))
