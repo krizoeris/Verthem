@@ -1,51 +1,11 @@
-import NextAuth, { AuthError } from "next-auth";
-import { authConfig } from "../auth/auth.config";
-import Google from "next-auth/providers/google";
-import Credentials from "next-auth/providers/credentials";
-import { z } from "zod";
-import bcrypt from "bcrypt";
+import "@/lib/env/envConfig";
+import NextAuth from "next-auth";
 import type { NextAuthConfig, Session } from "next-auth";
-import { createUser, getUser } from "../actions/createUser";
+import { createUser, getUser } from "@/actions/users-action";
+import { GoogleProvider } from "./providers";
 
 export const { handlers, auth, signIn } = NextAuth({
-  ...authConfig,
-  providers: [
-    Google({
-      authorization: {
-        params: {
-          access_type: "offline",
-          prompt: "consent",
-          scope: [
-            "openid",
-            "https://www.googleapis.com/auth/userinfo.email",
-            "https://www.googleapis.com/auth/userinfo.profile",
-            // and more scope urls
-          ].join(" "),
-          response: "code",
-        },
-      },
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-    Credentials({
-      async authorize(credentials) {
-        const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
-          .safeParse(credentials);
-
-        if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
-          const user = await getUser(email);
-          if (!user) return null;
-          const passwordMatch = await bcrypt.compare(password, user.password);
-          console.log("passwordMatch", passwordMatch);
-          if (passwordMatch) return user;
-        }
-        console.log("Invalid Credentials");
-        return null;
-      },
-    }),
-  ],
+  providers: [GoogleProvider],
   callbacks: {
     async jwt({ token, user, account, profile }) {
       console.log({ token, user, profile });
@@ -74,11 +34,12 @@ export const { handlers, auth, signIn } = NextAuth({
       } else {
         console.log("Access token expired getting new one");
         try {
+          console.log(process.env.AUTH_GOOGLE_SECRET);
           const response = await fetch("https://oauth2.googleapis.com/token", {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
-              client_id: process.env.AUTH_GOOGLE_ID as string, // Type assertion
-              client_secret: process.env.AUTH_GOOGLE_SECRET as string, // Type assertion
+              client_id: process.env.GOOGLE_CLIENT_ID as string, // Type assertion
+              client_secret: process.env.GOOGLE_CLIENT_SECRET as string, // Type assertion
               grant_type: "refresh_token",
               refresh_token: token.refresh_token as string, // Type assertion
             }),
