@@ -1,7 +1,7 @@
 import "@/lib/env/envConfig";
 import NextAuth from "next-auth";
 import type { NextAuthConfig, Session } from "next-auth";
-import { createUser, getUser } from "@/actions/users-action";
+import { createUser, getUserByEmail } from "@/actions/users-action";
 import { GoogleProvider } from "./providers";
 
 export const { handlers, auth, signIn } = NextAuth({
@@ -12,8 +12,8 @@ export const { handlers, auth, signIn } = NextAuth({
       // Initial sign in
       if (account && user && profile) {
         if (account.provider === "google" && user.email) {
-          const existingUser = await getUser(user.email);
-          if (!existingUser) {
+          const isUserExist = await getUserByEmail(user.email);
+          if (!isUserExist?.success) {
             //set user here
             await createUser(
               profile?.name as string,

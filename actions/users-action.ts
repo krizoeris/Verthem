@@ -1,47 +1,75 @@
 "use server";
 import { db } from "@/db";
-import { Users } from "@/db/schema";
+import { Users, UsersOnWorkspaces, Workspaces } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-export async function getUser(email: string): Promise<any> {
-  // return undefined;
+export async function getUserByEmail(email: string): Promise<any> {
   try {
-    const result = await db.select().from(Users).where(eq(Users.email, email));
+    const getUser = await db
+      .select()
+      .from(Users)
+      .where(eq(Users.email, email))
+      .get();
 
-    if (result.length === 0) {
-      return undefined;
-    }
+    if (!getUser)
+      return {
+        error: "No users found",
+      };
 
-    const user = result[0];
-    return user;
+    return {
+      success: getUser,
+    };
   } catch (error) {
-    console.error("Failed to fetch user:", error);
-    throw new Error("Failed to fetch user.");
+    console.error("[CODE ERROR]: ", error);
+    return { error };
   }
 }
 
-export async function createUser(
-  name: string,
-  email: string,
-  picture: string,
-): Promise<void> {
-  const id = crypto.randomUUID();
-  const date = new Date();
-
+export async function createUser(name: string, email: string, image: string) {
   try {
-    const data = await db
+    const newUser = await db
       .insert(Users)
       .values({
-        name: name,
-        email: email,
-        image: picture,
-        createdAt: date,
-        updatedAt: date,
+        name,
+        email,
+        image,
       })
-      .returning();
+      .returning({
+        id: Users.id,
+        name: Users.name,
+      })
+      .get();
 
-    return;
+    const isWorkspaceTitleExist = await db
+      .select()
+      .from(Workspaces)
+      .where(eq(Workspaces.title, newUser.name))
+      .get();
+    const title: string = isWorkspaceTitleExist
+      ? `${newUser.name}-${newUser.id}`
+      : newUser.name.toString();
+
+    const newWorkspace = await db
+      .insert(Workspaces)
+      .values({
+        title,
+      })
+      .returning({
+        id: Workspaces.id,
+        title: Workspaces.title,
+      })
+      .get();
+
+    await db.insert(UsersOnWorkspaces).values({
+      userId: newUser.id,
+      workspaceId: newWorkspace.id,
+    });
+
+    return {
+      success: newUser,
+    };
   } catch (error) {
-    throw error;
+    console.error("[CODE ERROR]: ", error);
+    return { error };
   }
 }
