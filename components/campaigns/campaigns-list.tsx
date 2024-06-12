@@ -1,4 +1,3 @@
-import { FC } from "react";
 import CampaignsCard from "@/components/campaigns/campaigns-card";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,7 @@ type CampaignListProps = {
   campaigns: campaigns[];
 };
 
-export const CampaignList: FC<CampaignListProps> = ({ campaigns }) => {
+export const CampaignList = ({ campaigns }: CampaignListProps) => {
   if (campaigns.length > 0) {
     return (
       <>

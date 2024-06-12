@@ -1,5 +1,4 @@
 "use client";
-import React, { FC } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -16,7 +15,7 @@ type CampaignListProps = {
   campaign: campaigns;
 };
 
-const CampaignsCard: FC<CampaignListProps> = ({ campaign }) => {
+const CampaignsCard = ({ campaign }: CampaignListProps) => {
   return (
     <div className="w-full h-[160px] flex gap-6 pb-8 border-b border-slate-200">
       <div
