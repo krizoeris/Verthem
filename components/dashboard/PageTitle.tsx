@@ -6,9 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
-import { PageTitleProps } from "@/types/definitions";
-
-const PageTitle: FC<PageTitleProps> = ({ subText }) => {
+const PageTitle: FC<Global.Props.PageTitleProps> = ({ subText }) => {
   const pathName: string = usePathname();
 
   return (
