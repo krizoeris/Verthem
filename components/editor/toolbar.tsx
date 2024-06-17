@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { Layers } from "@craftjs/layers";
 import { useToolbar } from "@/context/toolbar-context";
+import { VerthemLayer } from "@/components/editor/layers/verthem-layer";
 import ComponentList from "@/components/editor/component-list";
 import { SettingsContainer } from "@/components/editor/component-settings";
 import {
@@ -79,7 +80,7 @@ const EditorToolbox = () => {
 
   const tools = [
     { key: "components", toolbox: <ComponentList /> },
-    { key: "layers", toolbox: <Layers /> },
+    { key: "layers", toolbox: <Layers renderLayer={VerthemLayer} /> },
     {
       key: "settings",
       toolbox: (
