@@ -13,7 +13,7 @@ import { Column, ColumnContainer } from "@/components/editor/node/columns";
 
 export default function Viewport() {
   return (
-    <div className="verthem-container flex flex-col flex-grow w-full">
+    <div className="verthem-container flex flex-col flex-grow w-full h-screen">
       <Editor
         resolver={{ Layout, Container, ColumnContainer, Column, Text }}
         onRender={RenderNode}
