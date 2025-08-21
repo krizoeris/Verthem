@@ -35,17 +35,18 @@ export const VerthemLayer = ({ children }: { children: React.ReactNode }) => {
       <VerthemLayerHeader />
       {children ? (
         <div
-          className={cn("relative", {
-            "ml-9 bg-white/5 shadow-[0px_0px_44px_-1px_rgba(0,0,0,0.1)] rounded-2xl mr-1 mb-1 mt-1":
+          className={cn("relative verthem-layer", {
+            "ml-6 bg-white/5 shadow-[0px_0px_44px_-1px_rgba(0,0,0,0.1)] rounded-2xl mr-1 mb-1 mt-1":
               hasChildCanvases,
+            "ml-6": !hasChildCanvases,
           })}
         >
           {hasChildCanvases && (
-            <div className="before:absolute before:left-[-19px] before:w-0.5 before:h-full before:content-[''] before:bg-black/10 overflow-hidden">
+            <div className="ml-4 before:absolute before:left-[-19px] before:w-0.5 before:h-full before:content-[''] before:bg-black/10 overflow-hidden">
               {children}
             </div>
           )}
-          {!hasChildCanvases && children}
+          {!hasChildCanvases && <div>{children}</div>}
         </div>
       ) : null}
     </div>
