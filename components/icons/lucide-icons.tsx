@@ -1,4 +1,4 @@
-import { icons, LucideIcon as LucideIconType } from 'lucide-react';
+import { icons, LucideIcon as LucideIconType } from "lucide-react";
 
 type IconProps = {
   name: keyof typeof icons;
@@ -6,14 +6,14 @@ type IconProps = {
   size?: string | number;
 };
 
-const Icon: React.FC<IconProps> = ({ name, color, size }) => {
+const Icon = ({ name, color, size }: IconProps) => {
   const LucideIcon: LucideIconType = icons[name];
-  
+
   if (!LucideIcon) {
     console.error(`Icon ${name} not found in lucide-react`);
     return null;
   }
-  
+
   return <LucideIcon color={color} size={size} />;
 };
 

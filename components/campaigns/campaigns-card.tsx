@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -10,11 +9,13 @@ import { Image } from "lucide-react";
 // import utilities
 import { campaignStatusClass, formatDateTime } from "@/utils/index";
 
-export default function CampaignsCard({
-  campaign,
-}: {
-  campaign: Global.Campaign.Campaign;
-}) {
+import type { campaigns } from "./campaigns-list";
+
+type CampaignListProps = {
+  campaign: campaigns;
+};
+
+const CampaignsCard = ({ campaign }: CampaignListProps) => {
   return (
     <div className="w-full h-[160px] flex gap-6 pb-8 border-b border-slate-200">
       <div
@@ -37,7 +38,7 @@ export default function CampaignsCard({
         </p>
         <p>
           <span className="text-muted-foreground">Last modified: </span>
-          {formatDateTime(campaign.updated_at.toString())}
+          {campaign.updatedAt && formatDateTime(campaign.updatedAt.toString())}
         </p>
       </div>
       <div className="w-[20%] flex gap-2 items-center justify-end">
@@ -54,4 +55,6 @@ export default function CampaignsCard({
       </div>
     </div>
   );
-}
+};
+
+export default CampaignsCard;

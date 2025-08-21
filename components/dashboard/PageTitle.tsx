@@ -1,14 +1,9 @@
 "use client";
-
-import React from "react";
-import { FC } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
-import { PageTitleProps } from "@/types/definitions";
-
-const PageTitle: FC<PageTitleProps> = ({ subText }) => {
+const PageTitle = ({ subText }: Global.Props.PageTitleProps) => {
   const pathName: string = usePathname();
 
   return (
