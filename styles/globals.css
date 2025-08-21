@@ -102,6 +102,19 @@
 }
 
 @layer components {
+  .component-selected,
+  .component-hover {
+    @apply relative cursor-move;
+  }
+  .component-selected::after {
+    content: " ";
+    @apply border-dotted border-2 border-verthem-900 w-full h-full absolute left-0 top-0 pointer-events-none block;
+  }
+  .component-hover::after {
+    content: " ";
+    @apply border-dotted border-2 border-verthem-900 w-full h-full absolute left-0 top-0 pointer-events-none block;
+  }
+
   .verthem-homepage nav a,
   .verthem-homepage .nav-auth a,
   .verthem-homepage footer a {
